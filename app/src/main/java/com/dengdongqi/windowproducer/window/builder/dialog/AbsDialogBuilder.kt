@@ -2,12 +2,9 @@ package com.dengdongqi.windowproducer.window.builder.dialog
 
 import android.app.Dialog
 import android.graphics.drawable.Drawable
-import android.view.View
-import androidx.annotation.LayoutRes
 import androidx.annotation.StyleRes
 import com.dengdongqi.windowproducer.window.builder.AbsWindowBuilder
 import com.dengdongqi.windowproducer.window.builder.OnShowDismissListener
-import com.dengdongqi.windowproducer.window.builder.pop.PopBuilder
 
 /**
  * <pre>

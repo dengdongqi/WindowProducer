@@ -3,7 +3,6 @@ package com.dengdongqi.windowproducer.window.factory
 import com.dengdongqi.windowproducer.window.builder.dialog.DialogFactory
 import com.dengdongqi.windowproducer.window.builder.pop.PopFactory
 
-
 /**
  * <pre>
  * Created by DengDongQi on 2021/4/21

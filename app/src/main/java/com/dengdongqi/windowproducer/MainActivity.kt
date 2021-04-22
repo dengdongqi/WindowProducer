@@ -1,5 +1,6 @@
 package com.dengdongqi.windowproducer
 
+import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -18,11 +19,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        val dialog = WindowProducer
+        val dialog: Dialog= WindowProducer
             .dialogFactory()
             .builder(this)
             .setContentView(R.layout.activity_main)
             .setCancelable(true)
+            .setdim(true,0.5f)
             .setLayoutParamsWidth(800)
             .setLayoutParamsHeight(400)
             .setBackgroundDrawable(ColorDrawable(Color.parseColor("#ff00ff")))

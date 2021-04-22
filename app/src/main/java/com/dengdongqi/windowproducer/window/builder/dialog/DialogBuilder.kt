@@ -8,7 +8,6 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.annotation.LayoutRes
 import androidx.annotation.StyleRes
-import com.dengdongqi.windowproducer.window.builder.AbsWindowBuilder
 import com.dengdongqi.windowproducer.window.builder.OnShowDismissListener
 
 /**
