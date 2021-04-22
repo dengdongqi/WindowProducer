@@ -1,6 +1,6 @@
 # WindowProducer
-构建者+抽象工厂实现 Dialog, PopupWindow 快捷生成
-除 setOnShowDismissListener() 接口外其他都是原始 Dialog 和 PopupWindow 原生接口
+构建者+抽象工厂实现 Dialog, PopupWindow 快捷生成  
+除 setOnShowDismissListener() 接口外其他都是原始 Dialog 和 PopupWindow 原生接口  
 WindowProducer 只负责选择具体工厂,具体工厂只负责构建最终具体产品
 
 
