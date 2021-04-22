@@ -8,7 +8,7 @@ import com.dengdongqi.windowproducer.window.builder.OnShowDismissListener
 /**
  * <pre>
  * Created by DengDongQi on 2021/4/22
- *
+ * Dialog 增加show() dismiss() 监听
  * </pre>
  */
 class MDialog :Dialog{

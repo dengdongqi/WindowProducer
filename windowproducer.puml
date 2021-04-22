@@ -1,0 +1,49 @@
+@startuml
+class com.dengdongqi.windowproducer.window.factory.WindowProducer {
+- {static} PopFactory popFactory
+- {static} DialogFactory dialogFactory
++ {static} WindowProducer INSTANCE
++ {static} PopFactory popFactory()
++ {static} DialogFactory dialogFactory()
+}
+
+class com.dengdongqi.windowproducer.window.builder.pop.PopFactory {
++ PopBuilder builder(Context)
++ PopBuilder builder(Activity)
++ PopBuilder builder(FragmentActivity)
++ PopBuilder builder(View)
++ PopBuilder builder(androidx.fragment.app.Fragment)
++ PopBuilder builder(Fragment)
+- PopBuilder get(Context)
+}
+
+
+com.dengdongqi.windowproducer.window.factory.AbsWindowFactory <|-- com.dengdongqi.windowproducer.window.builder.pop.PopFactory
+
+interface com.dengdongqi.windowproducer.window.builder.OnShowDismissListener {
++ void onShow()
++ void onDismiss()
+}
+
+class com.dengdongqi.windowproducer.window.builder.pop.MPopupWindow {
+- OnShowDismissListener mOnShowDismissListener
++ void showAtLocation(View,int,int,int)
++ void showAsDropDown(View,int,int,int)
++ void dismiss()
++ void setOnShowDismissListener(OnShowDismissListener)
+}
+
+android.widget.PopupWindow <|-- com.dengdongqi.windowproducer.window.builder.pop.MPopupWindow
+
+
+class com.dengdongqi.windowproducer.window.builder.dialog.MDialog {
+- OnShowDismissListener mOnShowDismissListener
++ void show()
++ void dismiss()
++ void setOnShowDismissListener(OnShowDismissListener)
+}
+
+android.app.Dialog <|-- com.dengdongqi.windowproducer.window.builder.dialog.MDialog
+
+
+@enduml

@@ -136,7 +136,7 @@ class PopBuilder : AbsPopupWindowBuilder() {
      * */
     override fun setOnDismissListener(onDismissListener: PopupWindow.OnDismissListener): PopBuilder {
         mPopupWindow.setOnDismissListener(onDismissListener)
-        //TODO 改为hook OnShowDismissListener接口管理bgAlpha
+        //TODO 改为代理OnShowDismissListener接口管理bgAlpha
         /*hookDismissListener()*/
         return this
     }
@@ -148,8 +148,10 @@ class PopBuilder : AbsPopupWindowBuilder() {
     override fun setBackgroundAlpha(bgAlpha: Float): PopBuilder {
         this.mBgAlpha = bgAlpha
         if (mBgAlpha in 0f..1f && this.mOnShowDismissListener!=null){
-            var proxyListener = proxyOnShowDismissListener(mOnShowDismissListener!!) as OnShowDismissListener
-            mPopupWindow.setOnShowDismissListener(proxyListener)
+            var proxyListener = proxyOnShowDismissListener(mOnShowDismissListener!!) as OnShowDismissListener?
+            if(proxyListener!=null) {
+                mPopupWindow.setOnShowDismissListener(proxyListener)
+            }
         }
         return this
     }
@@ -215,7 +217,7 @@ class PopBuilder : AbsPopupWindowBuilder() {
 
     /**
      * 动态代理onShowDismissListener接口
-     * show()之后设置透明度 ap
+     * show()之后设置透明度
      * dismiss 之后恢复
      * */
     private fun proxyOnShowDismissListener(listener: OnShowDismissListener): Any {
