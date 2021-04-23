@@ -3,6 +3,26 @@
 除 setOnShowDismissListener() 接口外其他都是原始 Dialog 和 PopupWindow 原生接口  
 WindowProducer 只负责选择具体工厂,具体工厂只负责构建最终具体产品
 
+## 使用
+* build.gradle构建文件中添加JitPack
+```
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+
+* ..app/build.gradle 添加依赖关系
+```
+	dependencies {
+            ......
+	        implementation 'com.github.dengdongqi:WindowProducer:Tag'
+	}
+```
+
+
 ## UML结构图
 ![UML结构图](https://github.com/dengdongqi/WindowProducer/blob/master/windowproducer.png?raw=true)
 
@@ -77,5 +97,5 @@ pop.showAsDropDown(view,0,0, Gravity.CENTER)
 pop.dismiss()
 ```
 
-### 扩展更多原生接口
+### 扩展更多
 在AbsDialogBuilder,AbsPopupWindowBuilder声明其他接口,并由DialogBuilder,PopBuilder实现具体逻辑即可
