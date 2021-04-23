@@ -4,7 +4,7 @@
 WindowProducer 只负责选择具体工厂,具体工厂只负责构建最终具体产品
 
 ## UML结构图
-![UML结构图][https://github.com/dengdongqi/WindowProducer/blob/master/windowproducer.png?raw=true]
+![UML结构图](https://github.com/dengdongqi/WindowProducer/blob/master/windowproducer.png?raw=true)
 
 ## 构建dialog
 ```
