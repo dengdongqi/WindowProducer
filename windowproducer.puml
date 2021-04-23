@@ -1,12 +1,13 @@
 @startuml
-class com.dengdongqi.windowproducer.window.factory.WindowProducer {
-- {static} PopFactory popFactory
-- {static} DialogFactory dialogFactory
-+ {static} WindowProducer INSTANCE
-+ {static} PopFactory popFactory()
-+ {static} DialogFactory dialogFactory()
+class com.dengdongqi.windowproducer.window.builder.dialog.DialogFactory {
++ DialogBuilder builder(Context)
++ DialogBuilder builder(Activity)
++ DialogBuilder builder(FragmentActivity)
++ DialogBuilder builder(View)
++ DialogBuilder builder(androidx.fragment.app.Fragment)
++ DialogBuilder builder(Fragment)
+- DialogBuilder get(Context)
 }
-
 class com.dengdongqi.windowproducer.window.builder.pop.PopFactory {
 + PopBuilder builder(Context)
 + PopBuilder builder(Activity)
@@ -16,9 +17,17 @@ class com.dengdongqi.windowproducer.window.builder.pop.PopFactory {
 + PopBuilder builder(Fragment)
 - PopBuilder get(Context)
 }
+class com.dengdongqi.windowproducer.window.factory.WindowProducer {
+- {static} PopFactory popFactory
+- {static} DialogFactory dialogFactory
++ {static} WindowProducer INSTANCE
++ {static} PopFactory popFactory()
++ {static} DialogFactory dialogFactory()
+}
 
-
+com.dengdongqi.windowproducer.window.factory.AbsWindowFactory <|-- com.dengdongqi.windowproducer.window.builder.dialog.DialogFactory
 com.dengdongqi.windowproducer.window.factory.AbsWindowFactory <|-- com.dengdongqi.windowproducer.window.builder.pop.PopFactory
+
 
 interface com.dengdongqi.windowproducer.window.builder.OnShowDismissListener {
 + void onShow()
@@ -32,7 +41,6 @@ class com.dengdongqi.windowproducer.window.builder.pop.MPopupWindow {
 + void dismiss()
 + void setOnShowDismissListener(OnShowDismissListener)
 }
-
 android.widget.PopupWindow <|-- com.dengdongqi.windowproducer.window.builder.pop.MPopupWindow
 
 
@@ -42,8 +50,101 @@ class com.dengdongqi.windowproducer.window.builder.dialog.MDialog {
 + void dismiss()
 + void setOnShowDismissListener(OnShowDismissListener)
 }
-
 android.app.Dialog <|-- com.dengdongqi.windowproducer.window.builder.dialog.MDialog
 
+abstract class com.dengdongqi.windowproducer.window.builder.AbsWindowBuilder {
++ {abstract}AbsWindowBuilder builder(Context)
++ {abstract}AbsWindowBuilder setContentView(View)
++ {abstract}AbsWindowBuilder setContentView(int)
++ {abstract}Object build()
+}
+
+
+abstract class com.dengdongqi.windowproducer.window.builder.pop.AbsPopupWindowBuilder {
++ {abstract}PopBuilder setWidth(int)
++ {abstract}PopBuilder setHeight(int)
++ {abstract}PopBuilder setFocusable(boolean)
++ {abstract}PopBuilder setOutsideTouchable(boolean)
++ {abstract}PopBuilder setBackgroundDrawable(Drawable)
++ {abstract}PopBuilder setInputMethodMode(int)
++ {abstract}PopBuilder setSoftInputMode(int)
++ {abstract}PopBuilder setAnimationStyle(int)
++ {abstract}PopBuilder setOnShowDismissListener(OnShowDismissListener)
++ {abstract}PopBuilder setOnDismissListener(PopupWindow.OnDismissListener)
++ {abstract}PopBuilder setBackgroundAlpha(float)
++ {abstract}PopupWindow build()
+}
+com.dengdongqi.windowproducer.window.builder.AbsWindowBuilder <|-- com.dengdongqi.windowproducer.window.builder.pop.AbsPopupWindowBuilder
+
+class com.dengdongqi.windowproducer.window.builder.pop.PopBuilder {
+- MPopupWindow mPopupWindow
+- Context mContext
+- View mContentView
+- float mBgAlpha
+- OnShowDismissListener mOnShowDismissListener
++ PopBuilder builder(Context)
++ PopBuilder setContentView(View)
++ PopBuilder setContentView(int)
++ PopBuilder setWidth(int)
++ PopBuilder setHeight(int)
++ PopBuilder setFocusable(boolean)
++ PopBuilder setOutsideTouchable(boolean)
++ PopBuilder setBackgroundDrawable(Drawable)
++ PopBuilder setInputMethodMode(int)
++ PopBuilder setSoftInputMode(int)
++ PopBuilder setAnimationStyle(int)
++ PopBuilder setOnShowDismissListener(OnShowDismissListener)
++ PopBuilder setOnDismissListener(PopupWindow.OnDismissListener)
++ PopBuilder setBackgroundAlpha(float)
++ PopupWindow build()
+- void setActivityAlpha(Context,float)
+- Object proxyOnShowDismissListener(OnShowDismissListener)
++ {static} void access$setActivityAlpha(PopBuilder,Context,float)
++ {static} Context access$getMContext$p(PopBuilder)
++ {static} void access$setMContext$p(PopBuilder,Context)
++ {static} float access$getMBgAlpha$p(PopBuilder)
++ {static} void access$setMBgAlpha$p(PopBuilder,float)
+}
+com.dengdongqi.windowproducer.window.builder.pop.AbsPopupWindowBuilder <|-- com.dengdongqi.windowproducer.window.builder.pop.PopBuilder
+
+class com.dengdongqi.windowproducer.window.builder.dialog.DialogBuilder {
+- Context mContext
+- MDialog mDialog
+- Window mWindow
+- WindowManager.LayoutParams mLp
++ DialogBuilder builder(Context)
++ DialogBuilder setContentView(View)
++ DialogBuilder setContentView(int)
++ DialogBuilder setCancelable(boolean)
++ DialogBuilder setGravity(int)
++ DialogBuilder setBackgroundDrawable(Drawable)
++ DialogBuilder setdim(boolean,float)
++ DialogBuilder setWindowAnimations(int)
++ DialogBuilder setContentPadding(int,int,int,int)
++ DialogBuilder setLayoutParamsHeight(int)
++ DialogBuilder setLayoutParamsWidth(int)
++ DialogBuilder setLayoutParamsX(int)
++ DialogBuilder setLayoutParamsY(int)
++ DialogBuilder setOnShowDismissListener(OnShowDismissListener)
++ Dialog build()
+- void showThrow()
+}
+com.dengdongqi.windowproducer.window.builder.dialog.AbsDialogBuilder <|-- com.dengdongqi.windowproducer.window.builder.dialog.DialogBuilder
+
+abstract class com.dengdongqi.windowproducer.window.builder.dialog.AbsDialogBuilder {
++ {abstract}DialogBuilder setCancelable(boolean)
++ {abstract}DialogBuilder setGravity(int)
++ {abstract}DialogBuilder setBackgroundDrawable(Drawable)
++ {abstract}DialogBuilder setdim(boolean,float)
++ {abstract}DialogBuilder setWindowAnimations(int)
++ {abstract}DialogBuilder setContentPadding(int,int,int,int)
++ {abstract}DialogBuilder setLayoutParamsHeight(int)
++ {abstract}DialogBuilder setLayoutParamsWidth(int)
++ {abstract}DialogBuilder setLayoutParamsX(int)
++ {abstract}DialogBuilder setLayoutParamsY(int)
++ {abstract}DialogBuilder setOnShowDismissListener(OnShowDismissListener)
++ {abstract}Dialog build()
+}
+com.dengdongqi.windowproducer.window.builder.AbsWindowBuilder <|-- com.dengdongqi.windowproducer.window.builder.dialog.AbsDialogBuilder
 
 @enduml
