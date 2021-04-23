@@ -8,9 +8,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.widget.Button
-import android.widget.PopupWindow
-import com.dengdongqi.windowproducer.window.builder.OnShowDismissListener
-import com.dengdongqi.windowproducer.window.factory.WindowProducer
+import com.dengdongqi.wproducer.builder.OnShowDismissListener
+import com.dengdongqi.wproducer.WindowProducer
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
             .setLayoutParamsWidth(800)
             .setLayoutParamsHeight(400)
             .setBackgroundDrawable(ColorDrawable(Color.parseColor("#ff00ff")))
-            .setOnShowDismissListener(object :OnShowDismissListener{
+            .setOnShowDismissListener(object : OnShowDismissListener {
                 override fun onShow() {
                     Log.e("DDQ","dialog show")
                 }

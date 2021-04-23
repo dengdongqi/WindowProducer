@@ -1,9 +1,9 @@
-package com.dengdongqi.windowproducer.window.builder.dialog
+package com.dengdongqi.wproducer.builder.dialog
 
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
-import com.dengdongqi.windowproducer.window.builder.OnShowDismissListener
+import com.dengdongqi.wproducer.builder.OnShowDismissListener
 
 /**
  * <pre>

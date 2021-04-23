@@ -1,7 +1,8 @@
-package com.dengdongqi.windowproducer.window.factory
+package com.dengdongqi.wproducer
 
-import com.dengdongqi.windowproducer.window.builder.dialog.DialogFactory
-import com.dengdongqi.windowproducer.window.builder.pop.PopFactory
+import com.dengdongqi.wproducer.builder.dialog.DialogFactory
+import com.dengdongqi.wproducer.builder.pop.PopFactory
+
 
 /**
  * <pre>

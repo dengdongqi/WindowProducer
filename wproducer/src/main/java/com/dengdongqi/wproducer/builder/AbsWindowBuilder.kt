@@ -1,4 +1,4 @@
-package com.dengdongqi.windowproducer.window.builder
+package com.dengdongqi.wproducer.builder
 
 import android.content.Context
 import android.view.View

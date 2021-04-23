@@ -1,4 +1,4 @@
-package com.dengdongqi.windowproducer.window.builder.dialog
+package com.dengdongqi.wproducer.builder.dialog
 
 import android.app.Dialog
 import android.content.Context
@@ -8,7 +8,7 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.annotation.LayoutRes
 import androidx.annotation.StyleRes
-import com.dengdongqi.windowproducer.window.builder.OnShowDismissListener
+import com.dengdongqi.wproducer.builder.OnShowDismissListener
 
 /**
  * <pre>

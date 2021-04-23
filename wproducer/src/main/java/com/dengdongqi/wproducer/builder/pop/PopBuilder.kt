@@ -1,4 +1,4 @@
-package com.dengdongqi.windowproducer.window.builder.pop
+package com.dengdongqi.wproducer.builder.pop
 
 import android.app.Activity
 import android.content.Context
@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
 import android.widget.PopupWindow
-import com.dengdongqi.windowproducer.window.builder.OnShowDismissListener
+import com.dengdongqi.wproducer.builder.OnShowDismissListener
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Proxy
 

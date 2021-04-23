@@ -1,10 +1,10 @@
-package com.dengdongqi.windowproducer.window.builder.dialog
+package com.dengdongqi.wproducer.builder.dialog
 
 import android.app.Dialog
 import android.graphics.drawable.Drawable
 import androidx.annotation.StyleRes
-import com.dengdongqi.windowproducer.window.builder.AbsWindowBuilder
-import com.dengdongqi.windowproducer.window.builder.OnShowDismissListener
+import com.dengdongqi.wproducer.builder.AbsWindowBuilder
+import com.dengdongqi.wproducer.builder.OnShowDismissListener
 
 /**
  * <pre>

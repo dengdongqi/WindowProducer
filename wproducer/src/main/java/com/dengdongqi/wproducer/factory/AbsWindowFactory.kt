@@ -1,11 +1,11 @@
-package com.dengdongqi.windowproducer.window.factory
+package com.dengdongqi.wproducer.factory
 
 import android.app.Activity
 import android.content.Context
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.dengdongqi.windowproducer.window.builder.AbsWindowBuilder
+import com.dengdongqi.wproducer.builder.AbsWindowBuilder
 
 /**
  * <pre>

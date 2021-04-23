@@ -1,4 +1,4 @@
-package com.dengdongqi.windowproducer.window.builder
+package com.dengdongqi.wproducer.builder
 
 /**
  * <pre>
