@@ -6,6 +6,7 @@ import android.graphics.PixelFormat
 import android.graphics.Point
 import android.os.Build
 import android.view.*
+import com.dengdongqi.wproducer.builder.OnShowDismissListener
 import com.dengdongqi.wproducer.builder.pop.PopBuilder
 
 /**
@@ -17,6 +18,9 @@ import com.dengdongqi.wproducer.builder.pop.PopBuilder
 class WmBuilder : AbsWmBuilder() {
     //上下文
     private lateinit var mContext: Context
+    //show dismiss 监听
+    private var mOnShowDismissListener: OnShowDismissListener? = null
+
     //系统窗口管理
     lateinit var mWindowManager: WindowManager
     //悬浮VIew
@@ -113,6 +117,10 @@ class WmBuilder : AbsWmBuilder() {
         return this
     }
 
+    override fun setOnShowDismissListener(onShowDismissListener: OnShowDismissListener): WmBuilder {
+        return this
+    }
+
 
     override fun build(): WmBuilder {
         return this
@@ -122,12 +130,11 @@ class WmBuilder : AbsWmBuilder() {
         if (!::mFloatView.isInitialized) {
             throw IllegalStateException("You must call setContentView(...) first")
         }
-
         mWindowManager.addView(mFloatView, layoutParams)
-
         if (mBgAlpha in 0f..1f) {
             setActivityAlpha(mContext, mBgAlpha)
         }
+        mOnShowDismissListener?.onShow()
         return this
     }
 
@@ -139,6 +146,7 @@ class WmBuilder : AbsWmBuilder() {
         if (mBgAlpha in 0f..1f) {
             setActivityAlpha(mContext, 1f)
         }
+        mOnShowDismissListener?.onDismiss()
         return this
     }
 

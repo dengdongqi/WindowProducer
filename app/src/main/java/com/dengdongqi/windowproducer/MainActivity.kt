@@ -14,6 +14,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.dengdongqi.wproducer.WindowProducer
 import com.dengdongqi.wproducer.builder.OnShowDismissListener
+import com.dengdongqi.wproducer.builder.wmanager.WmBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -84,7 +85,7 @@ class MainActivity : AppCompatActivity() {
         //endregion
 
         //region WindowManager
-        val wmBuilder = WindowProducer
+        val wmBuilder: WmBuilder = WindowProducer
             .windowManagerFactory()
             .builder(this)
             .setContentView(R.layout.activity_main)

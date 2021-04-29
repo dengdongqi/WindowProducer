@@ -1,7 +1,6 @@
 # WindowProducer
-构建者+抽象工厂实现 Dialog, PopupWindow 快捷生成  
-除 setOnShowDismissListener() 接口外其他都是原始 Dialog 和 PopupWindow 原生接口  
-WindowProducer 只负责选择具体工厂,具体工厂只负责构建最终具体产品
+构建者+抽象工厂实现 Dialog, PopupWindow ,WindowManager快捷生成  
+除 setOnShowDismissListener() 接口外其他都是原生接口  
 
 ## 使用
 * build.gradle构建文件中添加JitPack
@@ -97,5 +96,45 @@ pop.showAsDropDown(view,0,0, Gravity.CENTER)
 pop.dismiss()
 ```
 
+## 构建WindowManager
+```
+val wmBuilder: WmBuilder = WindowProducer
+            .windowManagerFactory()
+            .builder(this)
+            .setContentView(R.layout.activity_main)
+            .setLpType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT)
+            .setLpFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+            .setLpGravity(Gravity.TOP or Gravity.START)
+            .build()
+
+        wmBuilder.mFloatView.background = ColorDrawable(Color.parseColor("#ff0000"))
+
+        var x = 0f
+        var y = 0f
+        wmBuilder.mFloatView.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    x = event.x
+                    y = event.y
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    wmBuilder.layoutParams.x = (event.rawX - x).toInt()
+                    wmBuilder.layoutParams.y = (event.rawY - y).toInt()
+                    //刷新
+                    wmBuilder.mWindowManager.updateViewLayout(wmBuilder.mFloatView, wmBuilder.layoutParams)
+                }
+            }
+            return@setOnTouchListener true
+        }
+
+        button3.setOnClickListener {
+            wmBuilder.showFloatWindow()
+        }
+
+        wmBuilder.mFloatView.findViewById<Button>(R.id.button).setOnClickListener {
+            wmBuilder.dismissFloatWindow()
+        }
+```
+
 ### 扩展更多
-在AbsDialogBuilder,AbsPopupWindowBuilder声明其他接口,并由DialogBuilder,PopBuilder实现具体逻辑即可
+在AbsDialogBuilder,AbsPopupWindowBuilder,AbsWmBuilder声明其他接口,并由DialogBuilder,PopBuilder,WmBuilder实现具体逻辑即可

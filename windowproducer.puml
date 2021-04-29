@@ -1,5 +1,16 @@
 @startuml
-class com.dengdongqi.windowproducer.window.builder.dialog.DialogFactory {
+abstract class com.dengdongqi.wproducer.factory.AbsWindowFactory {
++ {abstract}AbsWindowBuilder builder(Context)
++ {abstract}AbsWindowBuilder builder(Activity)
++ {abstract}AbsWindowBuilder builder(FragmentActivity)
++ {abstract}AbsWindowBuilder builder(androidx.fragment.app.Fragment)
++ {abstract}AbsWindowBuilder builder(Fragment)
++ {abstract}AbsWindowBuilder builder(View)
++ void throwFANullException()
++ void throwContextNullException()
+}
+
+class com.dengdongqi.wproducer.builder.dialog.DialogFactory {
 + DialogBuilder builder(Context)
 + DialogBuilder builder(Activity)
 + DialogBuilder builder(FragmentActivity)
@@ -8,7 +19,10 @@ class com.dengdongqi.windowproducer.window.builder.dialog.DialogFactory {
 + DialogBuilder builder(Fragment)
 - DialogBuilder get(Context)
 }
-class com.dengdongqi.windowproducer.window.builder.pop.PopFactory {
+com.dengdongqi.wproducer.factory.AbsWindowFactory <|-- com.dengdongqi.wproducer.builder.dialog.DialogFactory
+
+
+class com.dengdongqi.wproducer.builder.pop.PopFactory {
 + PopBuilder builder(Context)
 + PopBuilder builder(Activity)
 + PopBuilder builder(FragmentActivity)
@@ -17,7 +31,22 @@ class com.dengdongqi.windowproducer.window.builder.pop.PopFactory {
 + PopBuilder builder(Fragment)
 - PopBuilder get(Context)
 }
-class com.dengdongqi.windowproducer.window.factory.WindowProducer {
+com.dengdongqi.wproducer.factory.AbsWindowFactory <|-- com.dengdongqi.wproducer.builder.pop.PopFactory
+
+
+class com.dengdongqi.wproducer.builder.wmanager.WmFactory {
++ WmBuilder builder(Context)
++ WmBuilder builder(Activity)
++ WmBuilder builder(FragmentActivity)
++ WmBuilder builder(View)
++ WmBuilder builder(androidx.fragment.app.Fragment)
++ WmBuilder builder(Fragment)
+- WmBuilder get(Context)
+}
+com.dengdongqi.wproducer.factory.AbsWindowFactory <|-- com.dengdongqi.wproducer.builder.wmanager.WmFactory
+
+
+class com.dengdongqi.wproducer.factory.WindowProducer {
 - {static} PopFactory popFactory
 - {static} DialogFactory dialogFactory
 + {static} WindowProducer INSTANCE
@@ -25,34 +54,32 @@ class com.dengdongqi.windowproducer.window.factory.WindowProducer {
 + {static} DialogFactory dialogFactory()
 }
 
-com.dengdongqi.windowproducer.window.factory.AbsWindowFactory <|-- com.dengdongqi.windowproducer.window.builder.dialog.DialogFactory
-com.dengdongqi.windowproducer.window.factory.AbsWindowFactory <|-- com.dengdongqi.windowproducer.window.builder.pop.PopFactory
 
-
-interface com.dengdongqi.windowproducer.window.builder.OnShowDismissListener {
+interface com.dengdongqi.wproducer.builder.OnShowDismissListener {
 + void onShow()
 + void onDismiss()
 }
 
-class com.dengdongqi.windowproducer.window.builder.pop.MPopupWindow {
+class com.dengdongqi.wproducer.builder.pop.MPopupWindow {
 - OnShowDismissListener mOnShowDismissListener
 + void showAtLocation(View,int,int,int)
 + void showAsDropDown(View,int,int,int)
 + void dismiss()
 + void setOnShowDismissListener(OnShowDismissListener)
 }
-android.widget.PopupWindow <|-- com.dengdongqi.windowproducer.window.builder.pop.MPopupWindow
+android.widget.PopupWindow <|-- com.dengdongqi.wproducer.builder.pop.MPopupWindow
 
 
-class com.dengdongqi.windowproducer.window.builder.dialog.MDialog {
+class com.dengdongqi.wproducer.builder.dialog.MDialog {
 - OnShowDismissListener mOnShowDismissListener
 + void show()
 + void dismiss()
 + void setOnShowDismissListener(OnShowDismissListener)
 }
-android.app.Dialog <|-- com.dengdongqi.windowproducer.window.builder.dialog.MDialog
+android.app.Dialog <|-- com.dengdongqi.wproducer.builder.dialog.MDialog
 
-abstract class com.dengdongqi.windowproducer.window.builder.AbsWindowBuilder {
+
+abstract class com.dengdongqi.wproducer.builder.AbsWindowBuilder {
 + {abstract}AbsWindowBuilder builder(Context)
 + {abstract}AbsWindowBuilder setContentView(View)
 + {abstract}AbsWindowBuilder setContentView(int)
@@ -60,7 +87,7 @@ abstract class com.dengdongqi.windowproducer.window.builder.AbsWindowBuilder {
 }
 
 
-abstract class com.dengdongqi.windowproducer.window.builder.pop.AbsPopupWindowBuilder {
+abstract class com.dengdongqi.wproducer.builder.pop.AbsPopupWindowBuilder {
 + {abstract}PopBuilder setWidth(int)
 + {abstract}PopBuilder setHeight(int)
 + {abstract}PopBuilder setFocusable(boolean)
@@ -74,9 +101,10 @@ abstract class com.dengdongqi.windowproducer.window.builder.pop.AbsPopupWindowBu
 + {abstract}PopBuilder setBackgroundAlpha(float)
 + {abstract}PopupWindow build()
 }
-com.dengdongqi.windowproducer.window.builder.AbsWindowBuilder <|-- com.dengdongqi.windowproducer.window.builder.pop.AbsPopupWindowBuilder
+com.dengdongqi.wproducer.builder.AbsWindowBuilder <|-- com.dengdongqi.wproducer.builder.pop.AbsPopupWindowBuilder
 
-class com.dengdongqi.windowproducer.window.builder.pop.PopBuilder {
+
+class com.dengdongqi.wproducer.builder.pop.PopBuilder {
 - MPopupWindow mPopupWindow
 - Context mContext
 - View mContentView
@@ -105,9 +133,10 @@ class com.dengdongqi.windowproducer.window.builder.pop.PopBuilder {
 + {static} float access$getMBgAlpha$p(PopBuilder)
 + {static} void access$setMBgAlpha$p(PopBuilder,float)
 }
-com.dengdongqi.windowproducer.window.builder.pop.AbsPopupWindowBuilder <|-- com.dengdongqi.windowproducer.window.builder.pop.PopBuilder
+com.dengdongqi.wproducer.builder.pop.AbsPopupWindowBuilder <|-- com.dengdongqi.wproducer.builder.pop.PopBuilder
 
-class com.dengdongqi.windowproducer.window.builder.dialog.DialogBuilder {
+
+class com.dengdongqi.wproducer.builder.dialog.DialogBuilder {
 - Context mContext
 - MDialog mDialog
 - Window mWindow
@@ -129,9 +158,10 @@ class com.dengdongqi.windowproducer.window.builder.dialog.DialogBuilder {
 + Dialog build()
 - void showThrow()
 }
-com.dengdongqi.windowproducer.window.builder.dialog.AbsDialogBuilder <|-- com.dengdongqi.windowproducer.window.builder.dialog.DialogBuilder
+com.dengdongqi.wproducer.builder.dialog.AbsDialogBuilder <|-- com.dengdongqi.wproducer.builder.dialog.DialogBuilder
 
-abstract class com.dengdongqi.windowproducer.window.builder.dialog.AbsDialogBuilder {
+
+abstract class com.dengdongqi.wproducer.builder.dialog.AbsDialogBuilder {
 + {abstract}DialogBuilder setCancelable(boolean)
 + {abstract}DialogBuilder setGravity(int)
 + {abstract}DialogBuilder setBackgroundDrawable(Drawable)
@@ -145,6 +175,52 @@ abstract class com.dengdongqi.windowproducer.window.builder.dialog.AbsDialogBuil
 + {abstract}DialogBuilder setOnShowDismissListener(OnShowDismissListener)
 + {abstract}Dialog build()
 }
-com.dengdongqi.windowproducer.window.builder.AbsWindowBuilder <|-- com.dengdongqi.windowproducer.window.builder.dialog.AbsDialogBuilder
+com.dengdongqi.wproducer.builder.AbsWindowBuilder <|-- com.dengdongqi.wproducer.builder.dialog.AbsDialogBuilder
 
+
+abstract class com.dengdongqi.wproducer.builder.wmanager.AbsWmBuilder {
++ {abstract}WmBuilder setLpType(int)
++ {abstract}WmBuilder setLpFlags(int)
++ {abstract}WmBuilder setLpGravity(int)
++ {abstract}WmBuilder setLayoutParamsHeight(int)
++ {abstract}WmBuilder setLayoutParamsWidth(int)
++ {abstract}WmBuilder setLayoutParamsX(int)
++ {abstract}WmBuilder setLayoutParamsY(int)
++ {abstract}WmBuilder setBackgroundAlpha(float)
++ {abstract}WmBuilder setOnShowDismissListener(OnShowDismissListener)
++ {abstract}WmBuilder showFloatWindow()
++ {abstract}WmBuilder dismissFloatWindow()
+}
+com.dengdongqi.wproducer.builder.AbsWindowBuilder <|-- com.dengdongqi.wproducer.builder.wmanager.AbsWmBuilder
+
+
+class com.dengdongqi.wproducer.builder.wmanager.WmBuilder {
+- Context mContext
++ WindowManager mWindowManager
++ View mFloatView
++ WindowManager.LayoutParams layoutParams
+- float mBgAlpha
++ WindowManager getMWindowManager()
++ void setMWindowManager(WindowManager)
++ View getMFloatView()
++ void setMFloatView(View)
++ WindowManager.LayoutParams getLayoutParams()
++ void setLayoutParams(WindowManager.LayoutParams)
++ WmBuilder builder(Context)
++ WmBuilder setContentView(View)
++ WmBuilder setContentView(int)
++ WmBuilder setLpType(int)
++ WmBuilder setLpFlags(int)
++ WmBuilder setLpGravity(int)
++ WmBuilder setLayoutParamsHeight(int)
++ WmBuilder setLayoutParamsWidth(int)
++ WmBuilder setLayoutParamsX(int)
++ WmBuilder setLayoutParamsY(int)
++ WmBuilder setBackgroundAlpha(float)
++ WmBuilder setOnShowDismissListener(OnShowDismissListener)
++ WmBuilder build()
++ WmBuilder showFloatWindow()
++ WmBuilder dismissFloatWindow()
+}
+com.dengdongqi.wproducer.builder.wmanager.AbsWmBuilder <|-- com.dengdongqi.wproducer.builder.wmanager.WmBuilder
 @enduml

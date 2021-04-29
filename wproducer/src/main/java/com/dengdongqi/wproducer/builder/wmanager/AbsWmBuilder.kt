@@ -1,6 +1,7 @@
 package com.dengdongqi.wproducer.builder.wmanager
 
 import com.dengdongqi.wproducer.builder.AbsWindowBuilder
+import com.dengdongqi.wproducer.builder.OnShowDismissListener
 import com.dengdongqi.wproducer.builder.dialog.DialogBuilder
 import com.dengdongqi.wproducer.builder.pop.PopBuilder
 
@@ -28,6 +29,8 @@ abstract class AbsWmBuilder : AbsWindowBuilder() {
     abstract fun setLayoutParamsY(y: Int): WmBuilder
     //set bg alpha
     abstract fun setBackgroundAlpha(bgAlpha: Float): WmBuilder
+    //set show dis listener
+    abstract fun setOnShowDismissListener(onShowDismissListener: OnShowDismissListener):WmBuilder
     //show
     abstract fun showFloatWindow(): WmBuilder
     //dismiss
