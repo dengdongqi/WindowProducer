@@ -163,21 +163,6 @@ class PopBuilder : AbsPopupWindowBuilder() {
         return mPopupWindow
     }
 
-    /**
-     * 设置上下文所指activity阴影
-     * @param mContext 上下文
-     * @param bgAlpha 透明度
-     * */
-    private fun setActivityAlpha(mContext:Context,bgAlpha:Float){
-        if(mContext is Activity && (bgAlpha in 0f..1.0f) ){
-            val act = mContext
-            val lp = act.window.attributes
-            lp.alpha = bgAlpha
-            act.window.attributes = lp
-            act.window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-        }
-    }
-
 //    /**
 //     * hook pop 关闭监听
 //     * */

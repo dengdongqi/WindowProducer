@@ -24,4 +24,5 @@ abstract class AbsPopupWindowBuilder : AbsWindowBuilder() {
     abstract fun setOnDismissListener(onDismissListener: PopupWindow.OnDismissListener):PopBuilder
     abstract fun setBackgroundAlpha(bgAlpha: Float): PopBuilder
     abstract override fun build(): PopupWindow
+
 }

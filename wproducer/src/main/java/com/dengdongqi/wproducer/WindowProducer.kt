@@ -2,6 +2,7 @@ package com.dengdongqi.wproducer
 
 import com.dengdongqi.wproducer.builder.dialog.DialogFactory
 import com.dengdongqi.wproducer.builder.pop.PopFactory
+import com.dengdongqi.wproducer.builder.wmanager.WmFactory
 
 
 /**
@@ -15,6 +16,8 @@ object WindowProducer{
     private var popFactory: PopFactory? = null
 
     private var dialogFactory: DialogFactory? = null
+
+    private var windowManagerFactory:WmFactory? = null
 
     @JvmStatic
     fun popFactory() : PopFactory{
@@ -30,5 +33,13 @@ object WindowProducer{
             dialogFactory = DialogFactory()
         }
         return dialogFactory!!
+    }
+
+    @JvmStatic
+    fun windowManagerFactory():WmFactory{
+        if(windowManagerFactory == null) {
+            windowManagerFactory = WmFactory()
+        }
+        return windowManagerFactory!!
     }
 }

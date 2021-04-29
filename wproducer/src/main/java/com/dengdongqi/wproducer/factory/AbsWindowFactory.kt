@@ -25,4 +25,18 @@ abstract class AbsWindowFactory {
     abstract fun builder(fragment: android.app.Fragment) : AbsWindowBuilder
 
     abstract fun builder(view: View) : AbsWindowBuilder
+
+    //fragment getActivity() == null 时抛出异常
+    fun throwFANullException(){
+        throw NullPointerException(
+            "You cannot start a builder on a Fragment where getActivity() "
+                    + "returns null (which usually occurs when getActivity() is called before the Fragment "
+                    + "is attached or after the Fragment is destroyed)."
+        )
+    }
+
+    //context == null 时抛出异常
+    fun throwContextNullException(){
+        throw NullPointerException("You cannot start a builder on a null Context")
+    }
 }

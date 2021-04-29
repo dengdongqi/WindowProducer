@@ -22,8 +22,8 @@ class DialogBuilder : AbsDialogBuilder() {
     //具体dialog
     private lateinit var mDialog: MDialog
     //dialog附属属性
-    private  var mWindow: Window? = null
-    private var mLp: WindowManager.LayoutParams? = null
+    var mWindow: Window? = null
+    var mLp: WindowManager.LayoutParams? = null
 
     override fun builder(mContext: Context): DialogBuilder {
         this.mContext = mContext
