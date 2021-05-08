@@ -96,7 +96,7 @@ pop.showAsDropDown(view,0,0, Gravity.CENTER)
 pop.dismiss()
 ```
 
-## 构建WindowManager
+## 构建WindowManager悬浮窗
 ```
 val wmBuilder: WmBuilder = WindowProducer
             .windowManagerFactory()

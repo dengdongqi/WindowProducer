@@ -19,12 +19,18 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //region dialog
+        testDialog()
+
+        testPop()
+
+        testWindowManager()
+    }
+
+    private fun testDialog() {
         val dialog: Dialog= WindowProducer
             .dialogFactory()
             .builder(this)
@@ -52,9 +58,9 @@ class MainActivity : AppCompatActivity() {
         button.setOnClickListener {
             dialog.show()
         }
-        //endregion
+    }
 
-        //region pop
+    private fun testPop() {
         val pop = WindowProducer.popFactory()
             .builder(this)
             .setContentView(R.layout.activity_main)
@@ -82,9 +88,10 @@ class MainActivity : AppCompatActivity() {
         button2.setOnClickListener {
             pop.showAsDropDown(button,0,0, Gravity.CENTER)
         }
-        //endregion
+    }
 
-        //region WindowManager
+    @SuppressLint("ClickableViewAccessibility")
+    private fun testWindowManager() {
         val wmBuilder: WmBuilder = WindowProducer
             .windowManagerFactory()
             .builder(this)
@@ -121,7 +128,5 @@ class MainActivity : AppCompatActivity() {
         wmBuilder.mFloatView.findViewById<Button>(R.id.button).setOnClickListener {
             wmBuilder.dismissFloatWindow()
         }
-        //endregion
-
     }
 }
